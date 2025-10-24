@@ -1,7 +1,7 @@
 // /api/status.js
 export default async function handler(req, res) {
   try {
-    const response = await fetch('https://api.mcsrvstat.us/2/play.childsmp.net');
+    const response = await fetch('https://api.mcsrvstat.us/bedrock/3/65.108.224.31:19490');
     const data = await response.json();
     res.setHeader('Cache-Control', 'no-store');
     res.status(200).json(data);
