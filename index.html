@@ -91,7 +91,7 @@
 
         .renewal-iframe {
             width: 100%;
-            height: 600px; /* Adjust height as needed */
+            height: 600px; 
             border: 3px solid var(--highlight-color);
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -117,6 +117,7 @@
                 <h2>Instructions to play:</h2>
                 <p>Step 1: Join using the Address and port below under the servers tab in minecraft BEDROCK. Step 2: Renew the server using the renew link below, this allows the server to start up. Always do it when starting to play, and an hour into playing, this allows the server to know that someone is on it and therefore will not shutdown and will stay online. The server should startup if offline shortly after renewing.</p>
             </div>
+        </div>
 
         <div class="card">
             <h2>Server Status</h2>
@@ -166,9 +167,6 @@
             const playersOnline = document.getElementById("players-online");
             const motdElement = document.getElementById("motd");
 
-            statusIndicator.innerHTML = '⏳ Loading...';
-            statusIndicator.className = 'status-indicator';
-
             try {
                 const res = await fetch(API_URL);
                 const data = await res.json();
@@ -179,19 +177,19 @@
                     const cleanMotd = data.motd?.clean?.join(' ') || 'The Bollucks SMP - A great place to play!';
                     
                     statusIndicator.innerHTML = `🟢 <span class="online">Online</span>`;
-                    statusIndicator.classList.add('online');
+                    statusIndicator.className = 'status-indicator online';
                     playersOnline.innerText = `${onlineCount}/${maxCount}`;
                     motdElement.innerText = cleanMotd;
                 } else {
                     statusIndicator.innerHTML = `🔴 <span class="offline">Offline</span>`;
-                    statusIndicator.classList.add('offline');
+                    statusIndicator.className = 'status-indicator offline';
                     playersOnline.innerText = '0/0';
                     motdElement.innerText = 'Server is currently offline. Use the renewal tool below to start it!';
                 }
             } catch (error) {
                 console.error("Fetch error:", error);
                 statusIndicator.innerHTML = `🔴 <span class="offline">Offline</span> (Fetch Error)`;
-                statusIndicator.classList.add('offline');
+                statusIndicator.className = 'status-indicator offline';
                 playersOnline.innerText = 'N/A';
                 motdElement.innerText = 'Failed to connect to status service.';
             }
